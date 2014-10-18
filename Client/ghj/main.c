@@ -20,6 +20,8 @@ void diep(char *s)
 
   int main(void)
   {
+        struct sockaddr_un my_addr, peer_addr;
+        socklen_t peer_addr_size;
         struct sockaddr_in si_other;
         int s, i, slen=sizeof(si_other);
         char buf[BUFLEN];
@@ -30,6 +32,7 @@ void diep(char *s)
         memset((char *) &si_other, 0, sizeof(si_other));
         si_other.sin_family = AF_INET;
         si_other.sin_port = htons(PORT);
+      
         if (inet_aton(SRV_IP, &si_other.sin_addr)==0) {
               fprintf(stderr, "inet_aton() failed\n");
               exit(1);
